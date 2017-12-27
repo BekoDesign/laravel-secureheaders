@@ -49,6 +49,7 @@ class ApplySecureHeaders
         $this->setHsts();
         $this->setCsp();
         $this->setMode();
+		$this->setErrorReporting();
 
         $adapter = new Adapter($response);
 
@@ -91,5 +92,18 @@ class ApplySecureHeaders
         if ($this->config->get('secure-headers.safeMode', false)) {
             $this->headers->safeMode();
         }
+    }
+    /**
+     * Set error reporting, if it is required.
+     *
+     * @return void
+     */
+    private function setErrorReporting()
+    {
+        if ($this->config->get('secure-headers.errorReporting', true)) {
+            $this->headers->errorReporting(true);
+        } else {
+            $this->headers->errorReporting(false);
+		}
     }
 }
