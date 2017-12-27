@@ -92,4 +92,17 @@ class ApplySecureHeaders
             $this->headers->safeMode();
         }
     }
+    /**
+     * Set error reporting, if it is required.
+     *
+     * @return void
+     */
+    private function setMode()
+    {
+        if ($this->config->get('secure-headers.errorReporting', true)) {
+            $this->headers->errorReporting(true);
+        } else {
+            $this->headers->errorReporting(false);
+		}
+    }
 }
